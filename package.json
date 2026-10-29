@@ -1,0 +1,58 @@
+{
+  "name": "hupu-reader",
+  "displayName": "虎扑阅读器",
+  "description": "在 VS Code 中浏览虎扑英雄联盟专区和豆瓣小组的公开帖子。",
+  "version": "0.1.0",
+  "publisher": "local",
+  "engines": { "vscode": "^1.96.0" },
+  "categories": ["Other"],
+  "main": "./out/extension.js",
+  "activationEvents": ["onView:hupuReader.hot", "onCommand:hupuReader.refresh", "onCommand:hupuReader.openPost", "onCommand:hupuReader.loadMore", "onView:doubanReader.group", "onCommand:doubanReader.refresh", "onCommand:doubanReader.loadMore", "onCommand:doubanReader.openPost", "onCommand:doubanReader.setCookie", "onCommand:doubanReader.clearCookie", "onCommand:doubanReader.openGroup"],
+  "contributes": {
+    "views": {
+      "explorer": [{ "id": "hupuReader.hot", "name": "git history" }, { "id": "doubanReader.group", "name": "今天谁又开麦了" }]
+    },
+    "commands": [
+      { "command": "hupuReader.refresh", "title": "虎扑阅读器：刷新专区帖子", "icon": "$(refresh)" },
+      { "command": "hupuReader.loadMore", "title": "虎扑阅读器：加载更多帖子" },
+      { "command": "hupuReader.openPost", "title": "虎扑阅读器：打开帖子" },
+      { "command": "hupuReader.refreshPost", "title": "虎扑阅读器：刷新当前帖子" },
+      { "command": "hupuReader.openInBrowser", "title": "虎扑阅读器：在浏览器中打开当前帖子" },
+      { "command": "doubanReader.refresh", "title": "豆瓣阅读器：刷新小组", "icon": "$(refresh)" },
+      { "command": "doubanReader.loadMore", "title": "豆瓣阅读器：加载更多帖子" },
+      { "command": "doubanReader.openPost", "title": "豆瓣阅读器：打开帖子" },
+      { "command": "doubanReader.openGroup", "title": "豆瓣阅读器：打开小组并完成验证" },
+      { "command": "doubanReader.setCookie", "title": "豆瓣阅读器：设置已验证的浏览器会话" },
+      { "command": "doubanReader.clearCookie", "title": "豆瓣阅读器：清除浏览器会话" },
+      { "command": "doubanReader.refreshPost", "title": "豆瓣阅读器：刷新当前帖子", "icon": "$(refresh)" },
+      { "command": "doubanReader.openInBrowser", "title": "豆瓣阅读器：在浏览器中打开当前帖子" }
+    ],
+    "menus": {
+      "view/title": [{ "command": "hupuReader.refresh", "when": "view == hupuReader.hot", "group": "navigation" }, { "command": "doubanReader.refresh", "when": "view == doubanReader.group", "group": "navigation" }],
+      "editor/title": [
+        { "command": "hupuReader.refreshPost", "when": "resourceScheme == hupu-reader", "group": "navigation" },
+        { "command": "doubanReader.refreshPost", "when": "resourceScheme == douban-reader", "group": "navigation" }
+      ]
+    },
+    "configuration": {
+      "title": "虎扑阅读器",
+      "properties": {
+        "hupuReader.cacheMinutes": {
+          "type": "number",
+          "default": 5,
+          "minimum": 0,
+          "maximum": 60,
+          "description": "虎扑和豆瓣的列表及帖子详情内存缓存时间，设为 0 禁用缓存。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && node --test test/*.test.cjs",
+    "vscode:prepublish": "npm run compile"
+  },
+  "dependencies": { "cheerio": "1.0.0" },
+  "devDependencies": { "@types/node": "^20.17.0", "@types/vscode": "^1.96.0", "typescript": "^5.7.0" }
+}
