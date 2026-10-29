@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { HupuService, renderPost } from "./hupu";
 import { PostSummary } from "./types";
 import { registerDouban } from "./doubanExtension";
+import { registerWeibo } from "./weibo";
 
 const SCHEME = "hupu-reader";
 function idFromUri(uri: vscode.Uri): string | undefined {
@@ -122,6 +123,7 @@ export function activate(context: vscode.ExtensionContext): void {
   const service = new HupuService(() => vscode.workspace.getConfiguration("hupuReader").get<number>("cacheMinutes", 5));
   const tree = new HotTree(service);
   const documents = new PostDocuments(service);
+  registerWeibo(context);
   registerDouban(context, () => vscode.workspace.getConfiguration("hupuReader").get<number>("cacheMinutes", 5));
   context.subscriptions.push(
     tree,

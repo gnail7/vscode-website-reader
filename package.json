@@ -1,37 +1,165 @@
 {
   "name": "hupu-reader",
   "displayName": "虎扑阅读器",
-  "description": "在 VS Code 中浏览虎扑英雄联盟专区和豆瓣小组的公开帖子。",
+  "description": "在 VS Code 中浏览虎扑英雄联盟专区、豆瓣小组和微博热搜。",
   "version": "0.1.0",
   "publisher": "local",
-  "engines": { "vscode": "^1.96.0" },
-  "categories": ["Other"],
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
   "main": "./out/extension.js",
-  "activationEvents": ["onView:hupuReader.hot", "onCommand:hupuReader.refresh", "onCommand:hupuReader.openPost", "onCommand:hupuReader.loadMore", "onView:doubanReader.group", "onCommand:doubanReader.refresh", "onCommand:doubanReader.loadMore", "onCommand:doubanReader.openPost", "onCommand:doubanReader.setCookie", "onCommand:doubanReader.clearCookie", "onCommand:doubanReader.openGroup"],
+  "activationEvents": [
+    "onView:hupuReader.hot",
+    "onCommand:hupuReader.refresh",
+    "onCommand:hupuReader.openPost",
+    "onCommand:hupuReader.loadMore",
+    "onView:doubanReader.group",
+    "onCommand:doubanReader.refresh",
+    "onCommand:doubanReader.loadMore",
+    "onCommand:doubanReader.openPost",
+    "onCommand:doubanReader.setCookie",
+    "onCommand:doubanReader.clearCookie",
+    "onCommand:doubanReader.openGroup",
+    "onView:weiboReader.hot",
+    "onCommand:weiboReader.refresh",
+    "onCommand:weiboReader.openTopic",
+    "onCommand:weiboReader.setCookie",
+    "onCommand:weiboReader.clearCookie",
+    "onCommand:weiboReader.refreshTopic"
+  ],
   "contributes": {
     "views": {
-      "explorer": [{ "id": "hupuReader.hot", "name": "git history" }, { "id": "doubanReader.group", "name": "今天谁又开麦了" }]
+      "explorer": [
+        {
+          "id": "hupuReader.hot",
+          "name": "git history"
+        },
+        {
+          "id": "doubanReader.group",
+          "name": "今天谁又开麦了"
+        },
+        {
+          "id": "weiboReader.hot",
+          "name": "微博热搜"
+        }
+      ]
     },
     "commands": [
-      { "command": "hupuReader.refresh", "title": "虎扑阅读器：刷新专区帖子", "icon": "$(refresh)" },
-      { "command": "hupuReader.loadMore", "title": "虎扑阅读器：加载更多帖子" },
-      { "command": "hupuReader.openPost", "title": "虎扑阅读器：打开帖子" },
-      { "command": "hupuReader.refreshPost", "title": "虎扑阅读器：刷新当前帖子" },
-      { "command": "hupuReader.openInBrowser", "title": "虎扑阅读器：在浏览器中打开当前帖子" },
-      { "command": "doubanReader.refresh", "title": "豆瓣阅读器：刷新小组", "icon": "$(refresh)" },
-      { "command": "doubanReader.loadMore", "title": "豆瓣阅读器：加载更多帖子" },
-      { "command": "doubanReader.openPost", "title": "豆瓣阅读器：打开帖子" },
-      { "command": "doubanReader.openGroup", "title": "豆瓣阅读器：打开小组并完成验证" },
-      { "command": "doubanReader.setCookie", "title": "豆瓣阅读器：设置已验证的浏览器会话" },
-      { "command": "doubanReader.clearCookie", "title": "豆瓣阅读器：清除浏览器会话" },
-      { "command": "doubanReader.refreshPost", "title": "豆瓣阅读器：刷新当前帖子", "icon": "$(refresh)" },
-      { "command": "doubanReader.openInBrowser", "title": "豆瓣阅读器：在浏览器中打开当前帖子" }
+      {
+        "command": "hupuReader.refresh",
+        "title": "虎扑阅读器：刷新专区帖子",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "hupuReader.loadMore",
+        "title": "虎扑阅读器：加载更多帖子"
+      },
+      {
+        "command": "hupuReader.openPost",
+        "title": "虎扑阅读器：打开帖子"
+      },
+      {
+        "command": "hupuReader.refreshPost",
+        "title": "虎扑阅读器：刷新当前帖子"
+      },
+      {
+        "command": "hupuReader.openInBrowser",
+        "title": "虎扑阅读器：在浏览器中打开当前帖子"
+      },
+      {
+        "command": "doubanReader.refresh",
+        "title": "豆瓣阅读器：刷新小组",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "doubanReader.loadMore",
+        "title": "豆瓣阅读器：加载更多帖子"
+      },
+      {
+        "command": "doubanReader.openPost",
+        "title": "豆瓣阅读器：打开帖子"
+      },
+      {
+        "command": "doubanReader.openGroup",
+        "title": "豆瓣阅读器：打开小组并完成验证"
+      },
+      {
+        "command": "doubanReader.setCookie",
+        "title": "豆瓣阅读器：设置已验证的浏览器会话"
+      },
+      {
+        "command": "doubanReader.clearCookie",
+        "title": "豆瓣阅读器：清除浏览器会话"
+      },
+      {
+        "command": "doubanReader.refreshPost",
+        "title": "豆瓣阅读器：刷新当前帖子",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "doubanReader.openInBrowser",
+        "title": "豆瓣阅读器：在浏览器中打开当前帖子"
+      },
+      {
+        "command": "weiboReader.refresh",
+        "title": "微博热搜：刷新",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "weiboReader.openTopic",
+        "title": "微博热搜：打开话题"
+      },
+      {
+        "command": "weiboReader.refreshTopic",
+        "title": "微博热搜：刷新当前话题",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "weiboReader.setCookie",
+        "title": "微博热搜：设置浏览器会话"
+      },
+      {
+        "command": "weiboReader.clearCookie",
+        "title": "微博热搜：清除浏览器会话"
+      }
     ],
     "menus": {
-      "view/title": [{ "command": "hupuReader.refresh", "when": "view == hupuReader.hot", "group": "navigation" }, { "command": "doubanReader.refresh", "when": "view == doubanReader.group", "group": "navigation" }],
+      "view/title": [
+        {
+          "command": "hupuReader.refresh",
+          "when": "view == hupuReader.hot",
+          "group": "navigation"
+        },
+        {
+          "command": "doubanReader.refresh",
+          "when": "view == doubanReader.group",
+          "group": "navigation"
+        },
+        {
+          "command": "weiboReader.refresh",
+          "when": "view == weiboReader.hot",
+          "group": "navigation"
+        }
+      ],
       "editor/title": [
-        { "command": "hupuReader.refreshPost", "when": "resourceScheme == hupu-reader", "group": "navigation" },
-        { "command": "doubanReader.refreshPost", "when": "resourceScheme == douban-reader", "group": "navigation" }
+        {
+          "command": "hupuReader.refreshPost",
+          "when": "resourceScheme == hupu-reader",
+          "group": "navigation"
+        },
+        {
+          "command": "doubanReader.refreshPost",
+          "when": "resourceScheme == douban-reader",
+          "group": "navigation"
+        },
+        {
+          "command": "weiboReader.refreshTopic",
+          "when": "resourceScheme == weibo-reader",
+          "group": "navigation"
+        }
       ]
     },
     "configuration": {
@@ -53,6 +181,12 @@
     "test": "npm run compile && node --test test/*.test.cjs",
     "vscode:prepublish": "npm run compile"
   },
-  "dependencies": { "cheerio": "1.0.0" },
-  "devDependencies": { "@types/node": "^20.17.0", "@types/vscode": "^1.96.0", "typescript": "^5.7.0" }
+  "dependencies": {
+    "cheerio": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/vscode": "^1.96.0",
+    "typescript": "^5.7.0"
+  }
 }
